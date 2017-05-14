@@ -8,14 +8,18 @@ from .models import Article,Navigation,Category
 def index(request):
     
     navigations = Navigation.objects.all()
-    categorys = Category.objects.filter(navigation = '随笔')
+    categorys = Category.objects.filter(navigation = '学习')
     cate_selec = categorys[0].name
     articles = Article.objects.filter(category = cate_selec)
     return render(request,'blog/index.html',{'navigations':navigations,'categorys':categorys,'articles':articles,'cate_selec':cate_selec})
    
 
 def navigation_detail(request,navigation_name):
+     
     navigations = Navigation.objects.all()
+    if navigation_name =='生活':
+        return render(request,'blog/authority.html',{'navigations':navigations})
+        
     categorys = Category.objects.filter(navigation = navigation_name)
     cate_selec = categorys[0].name
     articles = Article.objects.filter(category = cate_selec)
@@ -39,3 +43,7 @@ def article_detail(request,navigation_name,category_name,article_title):
     cate_selec = category_name
     article = Article.objects.get(title = article_title)
     return render(request,'blog/article.html',{'navigations':navigations,'categorys':categorys,'article':article,'cate_selec':cate_selec})
+
+def other(request):
+    navigations = Navigation.objects.all()
+    return render(request,'blog/authority.html',{'navigations':navigations})

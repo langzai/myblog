@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^navigation/(?P<navigation_name>[^/]+)/$',blog_views.navigation_detail,name= 'navigation'),
     url(r'^category/(?P<navigation_name>[^/]+)/(?P<category_name>[^/]+)/$',blog_views.category_detail,name= 'category'),
     url(r'^article/(?P<navigation_name>[^/]+)/(?P<category_name>[^/]+)/(?P<article_title>[^/]+)/$',blog_views.article_detail,name= 'article'),
+    url(r'.*',blog_views.other)
 ]
